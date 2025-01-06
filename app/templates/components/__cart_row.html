@@ -1,0 +1,28 @@
+<tr>
+    <th class="ps-0 py-3 border-light" scope="row">
+        <div class="d-flex align-items-center"><a class="reset-anchor d-block animsition-link" href="{% url 'product' item.product.slug %}"><img
+                    src="{{ item.product.get_first_image }}" alt="..."
+                    width="70"></a>
+            <div class="ms-3"><strong class="h6"><a class="reset-anchor animsition-link" href="{% url 'product' item.product.slug %}">{{ item.product.product_name }}</a></strong></div>
+        </div>
+    </th>
+    <td class="p-3 align-middle border-light">
+        <p class="mb-0 small">&#8381; {{ item.product.product_price }}</p>
+    </td>
+    <div class="row">
+        <td class="p3 align-middle border-light">
+            {% if 'cart' in request.path %}
+                <a href="{% url 'to_cart' item.product.pk 'delete' %}"><i class="fas fa-caret-left"></i></a>
+                {{ item.quantity }}
+                {% if item.product.product_quantity > 0 %}
+                <a href="{% url 'to_cart' item.product.pk 'add' %}"><i class="fas fa-caret-right"></i></a>
+                {% endif %}
+            {% endif %}
+        </td>
+    </div>
+    <td class="p-3 align-middle border-light">
+        <p class="mb-0 small">&#8381; {{ item.get_total_price }}</p>
+    </td>
+    <td class="p-3 align-middle border-light"><a class="reset-anchor" href="{% url 'to_cart' item.product.pk 'remove' %}"><i
+                class="fas fa-trash-alt small text-muted"></i></a></td>
+</tr>

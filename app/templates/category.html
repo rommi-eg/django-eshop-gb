@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+
+    <!-- Start Content -->
+    <div class="container py-5">
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h1 class="h2 pb-4">{{ title }}</h1>
+                <ul class="list-unstyled templatemo-accordion">
+                    <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                            Фильтр:
+                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                        </a>
+                        <ul class="collapse show list-unstyled pl-3">
+                            {% for filter in filters %}
+                                <li><a class="text-decoration-none" href="?type={{ filter.slug }}">{{ filter }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-inline shop-top-menu pb-3 pt-1">
+                            <li class="list-inline-item">
+                                Показано {{ products.count }} из {{ paginator.count }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for product in products  %}
+                        {% include "components/__product_cart.html" %}
+                    {% endfor %}
+                </div>
+
+                <div div="row">
+                    {% include "components/__pagination.html" %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- End Content -->
+
+  
+{% endblock content %}

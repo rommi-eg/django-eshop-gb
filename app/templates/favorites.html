@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Избранные товары{% endblock title %}
+
+{% block content %}
+<!-- Start Content -->
+<div class="container py-5">
+    <h1 class="h1 pb-4">Избранные товары</h1>
+    {% if products %}
+    <!-- content -->
+    <div class="col-lg-9">
+        <div class="row">
+            {% for product in products %}
+                {% include "components/__product_cart.html" %}
+            {% endfor %}
+        </div>
+        {% else %}
+        <div div class="container py-5">
+            <div div class="row text-center">
+                <div class="col-12 col-md-4">
+                    <h4 class="h4">У вас нет избранных товаров</h4>
+                    <img src="{% static 'img/no_fav.png' %}" width="300">
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <!-- pagination -->
+        {% include "components/__pagination.html" %}
+    </div>
+</div>
+<!-- End Content -->
+
+{% endblock content %}

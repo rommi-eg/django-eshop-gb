@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+
+<div class="container py-5">
+    <h1 class="h1 pb-4">Оплата прошла успешно! Спасибо за покупку!</h1>
+    <p>Вы можите продолжить покупки...</p>
+    <!-- content -->
+    <div class="col-lg-9">
+        <div div class="container py-5">
+            <div div class="row text-center">
+                <div class="col-12 col-md-4">
+                    <a href="{% url 'index' %}" class="btn btn-success">Вернуться на главную</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

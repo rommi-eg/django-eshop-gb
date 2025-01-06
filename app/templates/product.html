@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load app_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+<!-- Open Content -->
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <div class="card mb-3">
+                    <img class="card-img img-fluid" src="{{ product.get_first_image }}"
+                        id="product-detail">
+                </div>
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2">{{ product.product_name }}</h1>
+                        <p class="h3 py-2">Цена: {{ product.product_price }} &#8381;</p>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h6>В наличие:</h6>
+                            </li>
+                            <li class="list-inline-item">
+                                <p class="text-muted"><strong>{{ product.product_quantity }}</strong></p>
+                            </li>
+                        </ul>
+
+                        <h6>Описание:</h6>
+                        <p>{{ product.product_description }}</p>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h6>Цвет:</h6>
+                            </li>
+                            <li class="list-inline-item">
+                                <p class="text-muted"><strong>{{ product.product_color }}</strong></p>
+                            </li>
+                        </ul>
+
+                        <h6>Информация:</h6>
+                        <ul class="list-unstyled pb-3">
+                            <li>{{ product.product_info|linebreaks }}</li>
+                        </ul>
+
+                        <div class="row pb-3">
+                                <div class="col d-grid">
+                                    {% if request.user.is_authenticated %}
+                                        {% get_favorite_products request.user as fav_products %}
+                                    {% endif %}
+                                    {% if product in fav_products and request.user.is_authenticated %}
+                                    <a class="btn btn-success text-white"
+                                        href="{% url 'add_favorite' product.slug %}">Убрать из избранного</a>
+                                    {% else %}
+                                    <a class="btn btn-success text-white"
+                                        href="{% url 'add_favorite' product.slug %}">Добавить в избранное</a>
+                                    {% endif %}
+                                </div>
+                                <div class="col d-grid">
+                                    <a class="btn btn-success text-white"
+                                        href="{% url 'to_cart' product.pk 'add' %}">Добавить в корзину</a>
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Close Content -->
+
+<!-- Start Article -->
+{% include "components/__similar_products.html" %}
+<!-- End Article -->
+{% endblock content %}

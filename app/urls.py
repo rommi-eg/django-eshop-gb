@@ -1,0 +1,77 @@
+from django.urls import path
+
+from . import views
+
+
+urlpatterns = [
+    path(
+        '',
+        views.MainPage.as_view(),
+        name='index'
+    ),
+    path(
+        'category/<slug:slug>/',
+        views.SubCategories.as_view(),
+        name='category'
+    ),
+    path(
+        'product/<slug:slug>/',
+        views.ProductPage.as_view(),
+        name='product'
+    ),
+    path(
+        'auth/',
+        views.login_registration,
+        name='user_registration'
+    ),
+    path(
+        'login',
+        views.user_login,
+        name='user_login'
+    ),
+    path(
+        'logout',
+        views.user_logout,
+        name='user_logout'
+    ),
+    path(
+        'registration',
+        views.registration,
+        name='registration'
+    ),
+    path(
+        'add_favorite/<slug:product_slug>/',
+        views.save_favorite_product,
+        name='add_favorite'
+    ),
+    path(
+        'user_favorites/',
+        views.FavoriteProductsView.as_view(),
+        name='favorite_page'
+    ),
+    path(
+        'cart/',
+        views.cart,
+        name='cart',
+    ),
+    path(
+        'to_cart/<int:product_id>/<str:action>/',
+        views.to_cart,
+        name='to_cart',
+    ),
+    path(
+        'checkout/',
+        views.checkout,
+        name='checkout',
+    ),
+    path(
+        'payment/',
+        views.checkout_session,
+        name='payment',
+    ),
+    path(
+        'success/',
+        views.success_payment,
+        name='success',
+    ),
+]

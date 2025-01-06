@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+
+    <!-- Start Banner Hero -->
+    {% include "components/__banner.html" %}
+    <!-- End Banner Hero -->
+
+
+    <!-- Start Categories of The Month -->
+    {% include "components/categories.html" %}
+    <!-- End Categories of The Month -->
+
+
+    <!-- Start Featured Product -->
+    {% include "components/featured_product.html" %}
+    <!-- End Featured Product -->
+  
+{% endblock content %}

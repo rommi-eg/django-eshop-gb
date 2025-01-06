@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <!-- HERO SECTION-->
+        <section class="py-5 bg-light">
+          <div class="container">
+            <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+              <div class="col-lg-6">
+                <h1 class="h1 mb-0">Корзина</h1>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="py-5">
+          <h2 class="h2 mb-0">Список товаров</h2>
+          <div class="row">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+              <!-- CART TABLE-->
+              <div class="table-responsive mb-4">
+                <table class="table text-nowrap">
+                  <thead class="bg-light">
+                    <tr>
+                      <th class="border-0 p-3" scope="col"> <strong class="text-muted">Товар</strong></th>
+                      <th class="border-0 p-3" scope="col"> <strong class="text-muted">Стоимость</strong></th>
+                      <th class="border-0 p-3" scope="col"> <strong class="text-muted">Количество</strong></th>
+                      <th class="border-0 p-3" scope="col"> <strong class="text-muted">Сумма</strong></th>
+                      <th class="border-0 p-3" scope="col"> <strong class="text-md-start"></strong></th>
+                    </tr>
+                  </thead>
+                  <tbody class="border-0">
+                    {% for item in order_products  %}
+                        {% include "components/__cart_row.html" %}
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- CART NAV-->
+              <div class="bg-light px-4 py-3">
+                <div class="row align-items-center text-center">
+                  <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn btn-link p-0 text-dark btn-sm" href="{% url 'index' %}"><i class="fas fa-long-arrow-alt-left me-2"> </i>Вернуться к покупкам</a></div>
+                  <div class="col-md-6 text-md-end"><a class="btn btn-sm btn-success" href="{% url 'checkout' %}">Перейти к оформлению<i class="fas fa-long-arrow-alt-right ms-2"></i></a></div>
+                </div>
+              </div>
+            </div>
+            <!-- ORDER TOTAL-->
+            <div class="col-lg-4">
+              <div class="card border-0 rounded-0 p-lg-4 bg-light">
+                <div class="card-body">
+                  <h5 class="h2 mb-4">Корзина</h5>
+                  <ul class="list-unstyled mb-0">
+                    <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">Товары</strong><span>{{ order.get_cart_total_quantity }}</span></li>
+                    <li class="border-bottom my-2"></li>
+                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Всего: </strong><span>&#8381; {{ order.get_cart_total_price }}</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    </div>
+{% endblock content %}

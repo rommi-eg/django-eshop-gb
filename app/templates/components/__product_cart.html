@@ -1,0 +1,31 @@
+{% load app_tags %}
+<div class="col-md-4">
+    <div class="card mb-4 product-wap rounded-0">
+        <div class="card rounded-0">
+            <img class="card-img rounded-0 img-fluid" src="{{ product.get_first_image }}">
+            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                <ul class="list-unstyled">
+                    {% if request.user.is_authenticated %}
+                        {% get_favorite_products request.user as fav_products %}
+                    {% endif %}
+                    {% if product in fav_products and request.user.is_authenticated %}
+                        <li><a class="btn btn-success text-white" href="{% url 'add_favorite' product.slug %}"><i
+                                class="fas far fa-heart"></i></a></li>
+                    {% else %}
+                        <li><a class="btn btn-success text-white" href="{% url 'add_favorite' product.slug %}"><i
+                                class="far fa-heart"></i></a></li>
+                    {% endif %}
+                    <li><a class="btn btn-success text-white mt-2" href="{{ product.get_absolute_url }}"><i class="far fa-eye"></i></a></li>
+                    <li><a class="btn btn-success text-white mt-2" href="{% url 'to_cart' product.pk 'add' %}"><i class="fas fa-cart-plus"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+            <a href="{{ product.get_absolute_url }}" class="h3 text-decoration-none">{{ product }}</a>
+            <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                <li>Просмотры: {{ product.product_watched }}</li>
+            </ul>
+            <p class="text-center mb-0">Цена: {{ product.product_price }} &#8381;</p>
+        </div>
+    </div>
+</div>
