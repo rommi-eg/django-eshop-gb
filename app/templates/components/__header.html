@@ -28,15 +28,17 @@
                 </ul>
             </div>
             <div class="navbar align-self-center d-flex">
-                <!-- <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                    <div class="d-lg-flex flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Поиск ...">
+                            <form action="{% url 'search' %}" method="get" class="action login-form">  
+                                <input type="text" class="form-control" name="q" id="inputMobileSearch" placeholder="Поиск ...">
+                            </form>
                             <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
+                                <i class="fa fa-fw fa-search"></i>  
                             </div>
                         </div>
                     </div>
-                    <a class="nav-icon d-none d-lg-inline" href="" name='search' data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                    <!-- <a class="nav-icon d-none d-lg-inline" href="{% url 'search' %}" name="q" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a> -->
                 {% if request.user.is_authenticated %}

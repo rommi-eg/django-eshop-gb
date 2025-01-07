@@ -74,4 +74,9 @@ urlpatterns = [
         views.success_payment,
         name='success',
     ),
+    path(
+        'search/',
+        views.search,
+        name='search',
+    ),
 ]

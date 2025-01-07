@@ -341,7 +341,7 @@ def checkout_session(request):
             address.save()
 
         total_price = cart_info['cart_total_price']
-        total_quantity = cart_info['cart_total_quantity']
+       # total_quantity = cart_info['cart_total_quantity']
 
         session = stripe.checkout.Session.create(
             line_items=[
@@ -353,7 +353,7 @@ def checkout_session(request):
                         },
                         'unit_amount': int(total_price * 100)
                     },
-                    'quantity': total_quantity
+                    'quantity': 1
                 },
             ],
             mode='payment',
@@ -380,3 +380,19 @@ def success_payment(request):
         request=request,
         template_name='success.html'
     )
+
+
+def search(request):
+    """ Осуществляет поиск товара по названию """
+    query = request.GET.get('q')
+    if query != '' and query is not None:
+        products = Product.objects.filter(product_name__icontains=query)        
+        context = {
+            'title': 'Результаты поиска',
+            'products': products,
+        }
+        return render(
+            request=request,
+            template_name='category.html',
+            context=context
+        )
